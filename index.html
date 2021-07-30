@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+		<title>插入5挑戰，作者:智翔</title>
+		
+		<style type="text/css">			
+			
+		</style>
+	</head>
+	<body>
+		<input type="text" id="input">
+		<input type="button" id="button" value="按我">
+		<br>
+		<div id="showTime"></div>
+				
+	</body>
+	<script type="text/javascript">
+	
+		var input = document.getElementById("input");
+		var button = document.getElementById("button");
+		var showTime = document.getElementById("showTime");
+		
+		let num = 0;
+		let arr = [];
+		let digit = 0;
+		let insert = 5;
+		let isPositive = true;
+		
+		button.addEventListener('click',function(e){
+			num = input.value;
+			arr = [];
+			digit = 0;
+			isPositive = true;
+			
+			if(num < 0){
+				num = -num;
+				console.log(num);
+				isPositive = false;
+			}
+			
+			while(num>10){
+				arr[digit] = num % 10;
+				digit++;
+				num = (num - num % 10)/10;
+			}
+			arr[digit] = num;
+			
+			console.log("數字長度: " + arr.length);
+			
+			if(isPositive){
+				<!-- 84917 -->
+				for(let i = arr.length-1; i>=0; i--){
+					if(insert > arr[i]){
+						<!-- i=3  length=5  -->
+						for(let j = arr.length; j>i ; j--){
+							arr[j] = arr[j-1];
+						}
+						arr[i+1] = insert;
+						break;
+						
+					}
+					
+					if(i==0){
+						for(let j = arr.length; j>0 ; j--){
+							arr[j] = arr[j-1];
+						}
+						arr[0] = insert;
+						break;
+					}
+				}
+				console.log("數字長度: " + arr);
+			}else{
+				<!-- 84917 -->
+				for(let i = arr.length-1; i>=0; i--){
+					if(insert < arr[i]){
+						<!-- i=3  length=5  -->
+						for(let j = arr.length; j>i ; j--){
+							arr[j] = arr[j-1];
+						}
+						arr[i+1] = insert;
+						break;
+					}
+					if(i==0){
+						for(let j = arr.length; j>0 ; j--){
+							arr[j] = arr[j-1];
+						}
+						arr[0] = insert;
+						break;
+					}
+				}
+				console.log("數字長度: " + arr);
+			}
+			
+			
+			
+			let result = "";
+			if(isPositive == false){
+				result += "-";
+			}
+			
+			for(let i = arr.length; i > 0; i--){
+				result += arr[i-1];
+			}
+			
+			showTime.innerHTML = result;
+			console.log();
+			
+			
+		},false);
+	
+		
+		
+		
+		
+		
+		
+	</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
